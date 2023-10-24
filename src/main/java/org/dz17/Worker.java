@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class Worker {
 
     private final LogicClass simpleLogic;
@@ -12,7 +12,7 @@ public class Worker {
     private final  LogicClass dataLogic;
 
     private final DataComponent dataComponent;
-@Autowired
+//@Autowired
     public Worker(LogicClass simpleLogicClass, LogicClass logicClassData, DataComponent dataComponent) {
         this.simpleLogic = simpleLogicClass;
         this.dataLogic = logicClassData;

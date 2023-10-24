@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
     public interface  TextFileInteface {
+
         public default void createEmptyFile(String filename) {
             try {
                 File file = new File(filename);
@@ -30,6 +31,7 @@ import java.util.List;
 
         public default List<String> readFile(String filename) {
             List<String> lines = new ArrayList<>();
+
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(filename));
                 String line;
