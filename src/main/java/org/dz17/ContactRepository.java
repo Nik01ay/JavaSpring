@@ -5,6 +5,7 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
+import javax.annotation.PostConstruct;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +20,9 @@ public class ContactRepository implements TextFileInteface {
     @Value("${default.file}")
     private String filename;
 
-   @Autowired
-    public ContactRepository() {
-    //todo filename = null
-        System.out.println("имя файла по умолчанию - " + filename);
 
-        loadFromFile(filename);
+    public ContactRepository() {
+
     }
 
     public List<ContactEntity> getContactByMail(String mail) {
@@ -42,6 +40,7 @@ public class ContactRepository implements TextFileInteface {
 
     public  int addContact(ContactEntity contact){
         if (contact != null) {
+
             contactList.add(contact);
             System.out.println("добавлен конткакт: " + contact.toString()
                     + " всего конткактов - " + contactList.size());
@@ -61,6 +60,12 @@ public class ContactRepository implements TextFileInteface {
 
     public int loadFromFile(String filename) {
 
+        readFile(filename).forEach(s -> addContact(ContactConvertor.stringToContact(s)));
+        return contactList.size();
+    }
+    @PostConstruct
+    public int loadFromFileInProperty() {
+        System.out.println("Загружаем " + filename);
         readFile(filename).forEach(s -> addContact(ContactConvertor.stringToContact(s)));
         return contactList.size();
     }

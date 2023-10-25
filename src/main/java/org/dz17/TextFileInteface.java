@@ -3,10 +3,15 @@ package org.dz17;
 
 
 import java.io.*;
+import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
-    public interface  TextFileInteface {
+public interface  TextFileInteface {
 
         public default void createEmptyFile(String filename) {
             try {
@@ -31,19 +36,18 @@ import java.util.List;
 
         public default List<String> readFile(String filename) {
             List<String> lines = new ArrayList<>();
+            String line;
 
-            try {
-                BufferedReader reader = new BufferedReader(new FileReader(filename));
-                String line;
+            try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
                 while ((line = reader.readLine()) != null) {
                     lines.add(line);
                 }
-                reader.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("Ошибка чтения файла: " + e.getMessage());
             }
             return lines;
         }
+
 
         public default void updateLine(String filename, int lineIndex, String newLine) {
             List<String> lines = readFile(filename);
