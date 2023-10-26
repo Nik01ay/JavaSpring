@@ -56,7 +56,7 @@ public class ContactRepository implements TextFileInteface {
     }
 
     public String saveToFile(String filename) {
-        createFileWithContent(filename, contactList.stream().map(s -> toString()).collect(Collectors.toList()));
+        createFileWithContent(filename, contactList.stream().map(ContactEntity::toString).collect(Collectors.toList()));
         return filename;
     }
 

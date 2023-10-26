@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 //import javax.annotation.PostConstruct;
 
 
-public class InitContactLoading implements ContactLoadingInterface{
+public class InitContactLoading implements ContactLoadingInterface, TextFileInteface{
 
     @Value("${default.file}")
     private String filename;
@@ -24,7 +24,9 @@ public class InitContactLoading implements ContactLoadingInterface{
 
         System.out.println("Загружаем " + filename);
         List<ContactEntity> ceList = new ArrayList<>();
-       //  ceList = readFile(filename).stream(s -> (ContactConvertor.stringToContact(s))).collect(Collectors.toList());
+
+        ceList = readFile(filename).stream().map(ContactConvertor::stringToContact).collect(Collectors.toList());
+        System.out.println("Загружено " + ceList.size() + " контактов");
         return ceList;
     }
 

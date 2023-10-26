@@ -11,14 +11,12 @@ import java.util.List;
 
 public class DefaultContactLoading implements ContactLoadingInterface{
 
-    @Value("${default.file}")
-    private String filename;
 
 
     @Override
     public List<ContactEntity> load() {
 
-        System.out.println("Default Ничего не Загружаем " + filename);
+        System.out.println("Default Ничего не Загружаем " );
         List<ContactEntity> ceList = new ArrayList<>();
        //  ceList = readFile(filename).stream(s -> (ContactConvertor.stringToContact(s))).collect(Collectors.toList());
         return ceList;
