@@ -4,24 +4,26 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
-import javax.annotation.PostConstruct;
+
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Repository
+@Component
 public class ContactRepository implements TextFileInteface {
     @Getter
     @Setter
     private List<ContactEntity> contactList = new ArrayList<>();
 
-    @Value("${default.file}")
-    private String filename;
 
-
-    public ContactRepository() {
+    private ContactLoadingInterface contactLoadingInterface;
+    public ContactRepository(ContactLoadingInterface contactLoadingInterface) {
+        this.contactLoadingInterface = contactLoadingInterface;
+        contactList.addAll(contactLoadingInterface.getContact());
 
     }
 
@@ -63,12 +65,8 @@ public class ContactRepository implements TextFileInteface {
         readFile(filename).forEach(s -> addContact(ContactConvertor.stringToContact(s)));
         return contactList.size();
     }
-    @PostConstruct
-    public int loadFromFileInProperty() {
-        System.out.println("Загружаем " + filename);
-        readFile(filename).forEach(s -> addContact(ContactConvertor.stringToContact(s)));
-        return contactList.size();
-    }
+
+
 
 
 

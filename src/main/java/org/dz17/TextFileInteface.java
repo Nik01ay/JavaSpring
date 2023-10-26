@@ -44,6 +44,7 @@ public interface  TextFileInteface {
                 }
             } catch (IOException e) {
                 System.out.println("Ошибка чтения файла: " + e.getMessage());
+                return lines;
             }
             return lines;
         }
