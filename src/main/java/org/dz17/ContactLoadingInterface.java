@@ -7,4 +7,6 @@ public interface ContactLoadingInterface {
     public List<ContactEntity> load ();
 
     public List<ContactEntity> getContact();
+
+    public String getPath();
 }

@@ -27,6 +27,9 @@ public class ContactRepository implements TextFileInteface {
 
     }
 
+    public String getPath(){
+        return contactLoadingInterface.getPath();
+    }
     public List<ContactEntity> getContactByMail(String mail) {
         return contactList.stream().filter(c -> c.getMail().contains(mail)).collect(Collectors.toList());
     }
@@ -58,6 +61,10 @@ public class ContactRepository implements TextFileInteface {
     public String saveToFile(String filename) {
         createFileWithContent(filename, contactList.stream().map(ContactEntity::toString).collect(Collectors.toList()));
         return filename;
+    }
+
+    public String saveToDefaultFile(){
+        return saveToFile(getPath());
     }
 
     public int loadFromFile(String filename) {

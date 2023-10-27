@@ -32,7 +32,12 @@ public class ContactService {
     }
 
     public String save(String fileName){
-        return contactRepository.saveToFile(fileName);
+        if (fileName.isEmpty())
+        {
+            return contactRepository.saveToDefaultFile();
+        }
+        else
+            return contactRepository.saveToFile(fileName);
     }
 
 

@@ -22,7 +22,10 @@ public class DefaultContactLoading implements ContactLoadingInterface{
         return ceList;
     }
 
-
+    @Override
+    public String getPath() {
+        return "default.txt";
+    }
 
     @Override
     public List<ContactEntity> getContact() {

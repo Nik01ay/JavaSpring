@@ -35,7 +35,7 @@ public class ContactsApp {
                      contactService.print();
                     break;
                 case "add": {
-                    System.out.println("Введите контакт в формате: имя; телефон; mail");
+                    System.out.println("Введите контакт в формате: имя(латиницей); телефон; mail");
                     String contactString = scanner.nextLine();
                     contactService.add(contactString);
                 }
@@ -46,8 +46,10 @@ public class ContactsApp {
                 }
                     break;
                 case "save":
+                    System.out.println("Введите куда сохранить, или нажмите enter для сохранения по умолчанию");
                     String fileName = scanner.nextLine();
-                    contactService.save(fileName);
+                    String path = contactService.save(fileName);
+                    System.out.println("Файл сохранен в: " + path);
                     break;
                 case "help":
                     System.out.println("это помощь");

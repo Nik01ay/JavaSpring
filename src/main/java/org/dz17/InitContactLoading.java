@@ -16,8 +16,10 @@ public class InitContactLoading implements ContactLoadingInterface, TextFileInte
     @Value("${default.file}")
     private String filename;
 
-
-
+    @Override
+    public String getPath() {
+        return filename;
+    }
 
     @Override
     public List<ContactEntity> load() {

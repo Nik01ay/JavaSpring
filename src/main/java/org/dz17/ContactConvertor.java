@@ -6,10 +6,16 @@ public class ContactConvertor {
 
         String[] strings = string.split("; ");
         boolean error = false;
+        if (strings.length !=3){
+            System.out.println("Неправильный ввод. Разделитель \"; \"с пробелом, или количество параметров не равно 3");
+
+            return null;
+        }
+
 
         if (!strings[0].matches(RegularExpressions.PERSON_NAME.getPattern().pattern()))
         {
-            System.out.println("Неправильный ввод имени имя должно содержать только буквы");
+            System.out.println("Неправильный ввод имени имя может содержать только латинские буквы");
             error = true;
         }
 
@@ -17,7 +23,7 @@ public class ContactConvertor {
 
         if        (!strings[1].matches(RegularExpressions.PHONE_NUMBER.getPattern().pattern()))
         { error =true;
-            System.out.println("Неправильный ввод Номера телефона формат +7999-8888888");
+            System.out.println("Неправильный ввод Номера телефона формат +7999-8888888 можно без + и или без -");
         }
          if       (!strings[2].matches(RegularExpressions.EMAIL.getPattern().pattern())) {
              System.out.println("Неправильный ввод почты пример abc@abc.cem");
